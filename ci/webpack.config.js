@@ -42,12 +42,15 @@ const options = {
   module: {
     rules: [],
   },
-  plugins: [...definePlugins, new webpack.ProgressPlugin()],
-  new CleanWebpackPlugin({
-    verbose: true,
-    cleanStyleWebpackAssets: true, // Automatically remove all unused webpack assets on rebuild
-    cleanOnceBeforeBuildPatterns: [],
-  }),
+  plugins: [
+    ...definePlugins,
+    new webpack.ProgressPlugin(),
+    new CleanWebpackPlugin({
+      verbose: true,
+      cleanStyleWebpackAssets: true, // Automatically remove all unused webpack assets on rebuild
+      cleanOnceBeforeBuildPatterns: [],
+    }),
+  ],
 };
 
 module.exports = options;
