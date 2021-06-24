@@ -1,0 +1,45 @@
+{
+  "name": "quick-website-4rantd",
+  "version": "0.0.1",
+  "description": "React 17 & webpack5 & antd",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BigerFront/quick-website-4rantd.git"
+  },
+  "keywords": [
+    "React",
+    "Responsive",
+    "Boilerplate"
+  ],
+  "author": "lamborc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BigerFront/quick-website-4rantd/issues"
+  },
+  "homepage": "https://github.com/BigerFront/quick-website-4rantd#readme",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "chalk": "^4.1.1",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.2.6",
+    "file-loader": "^6.2.0",
+    "fs-extra": "^10.0.0",
+    "html-webpack-plugin": "^5.3.2",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.40.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  }
+}

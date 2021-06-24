@@ -1,0 +1,10 @@
+# ignore
+node_modules
+dist
+dist-zip
+.env.*.js
+
+# package
+package-lock.json
+yarn-error.log
+

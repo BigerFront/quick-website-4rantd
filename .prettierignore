@@ -1,0 +1,17 @@
+dist/
+dist-zip/
+node_modules/
+LICENSE
+.eslintignore
+.DS_Store
+*.png
+*.toml
+
+docker
+.dockerignore
+.eslintcache
+.editorconfig
+.history
+tsconfig.json
+jsconfig.json
+shared/**/*.min.js

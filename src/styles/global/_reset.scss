@@ -1,0 +1,15 @@
+/** 
+* Hat tip to @thierrykoblentz for this 
+* approach: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ 
+*/
+* {
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: inherit;
+}
+
+*:before,
+*:after {
+  box-sizing: inherit;
+}
