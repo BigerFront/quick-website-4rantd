@@ -8,7 +8,12 @@ module.exports = {
   R,
   join,
   parse: path.parse,
+  favicon: path.resolve(__dirname, '../src', 'favicon.ico'),
   src: path.resolve(__dirname, '../src'),
   dist: path.resolve(__dirname, '../dist'),
   distzip: path.resolve(__dirname, '../dist-zip'),
+  imagesBase: 'images',
+  fontsBase: 'fonts',
+  cssBase: 'css',
+  jsBase: 'js',
 };

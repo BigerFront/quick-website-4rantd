@@ -24,7 +24,7 @@ const versionTag = `${envWrapper['APP_VERSION']}-${
     : commitHash
 }`;
 
-const EJECT_ENV = EnvHandler.push('__DEBUG__', process.env.DEV_DEBUG)
+const EJECT_ENV = EnvHandler.push('__DEBUG__', process.env.DEV_DEBUG || false)
   .push('__VERSION_TAG__', versionTag)
   .push('__INFURA_KEY__', envWrapper['INFURA_KEY'] || '')
   .push('__INFURA_SECRET__', envWrapper['INFURA_SECRET'] || '')
