@@ -16,7 +16,7 @@ const { entry } = require('./entry-conf');
 
 const htmlPlugins = [
   new HtmlWebpackPlugin({
-    template: R(src, 'Boot', 'template.html'),
+    template: R(src, 'Boot', 'template.ejs'),
     title: envWrapper['APP_NAME'] || 'Official Website',
     filename: 'index.html',
     chunks: ['main'],
