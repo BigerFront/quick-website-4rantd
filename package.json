@@ -4,7 +4,9 @@
   "description": "React 17 & webpack5 & antd",
   "main": "index.js",
   "scripts": {
-    "dev": "node ci/serve.js",
+    "dev": "node ci/webserver.js",
+    "build": "node ci/build",
+    "serve": "lite-server -c ci/pub-bs-config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +25,7 @@
   },
   "homepage": "https://github.com/BigerFront/quick-website-4rantd#readme",
   "dependencies": {
+    "@hot-loader/react-dom": "^17.0.1",
     "antd": "^4.16.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
@@ -31,6 +34,7 @@
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.14.5",
     "babel-loader": "^8.2.2",
     "chalk": "^4.1.1",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
@@ -41,18 +45,22 @@
     "fs-extra": "^10.0.0",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
+    "http-proxy-middleware": "^2.0.0",
     "less-loader": "^10.0.0",
+    "lite-server": "^2.6.1",
     "mini-css-extract-plugin": "^1.6.0",
+    "optimize-css-assets-webpack-plugin": "^6.0.1",
     "react-hot-loader": "^4.13.0",
     "resolve-url-loader": "^4.0.0",
     "sass": "^1.35.1",
     "sass-loader": "^12.1.0",
     "source-map-loader": "^3.0.0",
     "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^5.1.4",
     "ts-loader": "^9.2.3",
     "url-loader": "^4.1.1",
     "webpack": "5.37.0",
-    "webpack-cli": "^4.7.2",
+    "webpack-cli": "4.7.0",
     "webpack-dev-server": "^3.11.2"
   }
 }

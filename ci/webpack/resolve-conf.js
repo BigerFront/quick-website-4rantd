@@ -1,4 +1,4 @@
-const { R, src, dist } = require('../paths');
+const { R, src } = require('../paths');
 
 const alias = {
   '~': src,
@@ -9,7 +9,7 @@ const alias = {
   '~UI': R(src, 'ui'),
   // '~Views':R(src,views), // 备用
   '~Widgets': R(src, 'ui/widgets'),
-  'react-dom': '@hot-loader/react-dom',
+  // 'react-dom': '@hot-loader/react-dom',
 };
 
 const fileExtensions = [

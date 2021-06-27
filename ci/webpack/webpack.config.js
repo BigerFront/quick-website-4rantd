@@ -7,47 +7,53 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const NullWebpackPlugin = require('./null-webpack-plugin');
 
 const definePlugins = require('./eject-env-plugins');
-const { context, R, src, dist, jsBase, favicon } = require('../paths');
+const { context, R, src, dist, join, favicon } = require('../paths');
 const envWrapper = require('../../config');
 
 const { alias, fileExtensions } = require('./resolve-conf');
-
-const PUBLIC_PATH = envWrapper.PUBLIC_PATH || '/assets/';
 
 const { entry } = require('./entry-conf');
 
 const htmlPlugins = [
   new HtmlWebpackPlugin({
     template: R(src, 'Boot', 'template.html'),
-    title: envWrapper['APP_NAME'] || '',
+    title: envWrapper['APP_NAME'] || 'Official Website',
     filename: 'index.html',
     chunks: ['main'],
     cache: false,
-    inject: 'body',
+    inject: true,
     favicon: favicon,
   }),
 ];
+const entryMain = R(src, 'Boot', 'index.js');
 
-const options = {
+var options = {
   context: context,
   mode: envWrapper.NODE_ENV,
   entry: entry,
-  output: {
-    path: R(dist, envWrapper.TARGET_TYPE || 'bs'),
-    clean: true,
-    pathinfo: false,
-    filename: '[name].bundle.js',
-    chunkFilename: (pathData) => {
-      return pathData.chunk.name === 'main'
-        ? '[name].js'
-        : '[name]/[chunkhash].js';
-    },
-    publicPath: PUBLIC_PATH,
-  },
+  // output: {
+  //   path: join(dist, envWrapper.TARGET_TYPE || 'bs'),
+  //   clean: true,
+  //   pathinfo: true,
+  //   filename: '[name].js',
+  //   filename: function (pathData) {
+  //     return pathData.chunk.name === 'main'
+  //       ? '[name].js'
+  //       : '[name]/[chunkhash].js';
+  //   },
+  //   chunkFilename: (pathData) => {
+  //     return pathData.chunk.name === 'main'
+  //       ? '[name].js'
+  //       : '[name]/[chunkhash].js';
+  //   },
+  //   publicPath: PUBLIC_PATH,
+  // },
   resolve: {
     alias: alias,
     extensions: fileExtensions
-      .map((extension) => '.' + extension)
+      .map(function (extension) {
+        return '.' + extension;
+      })
       .concat([
         '.js',
         '.jsx',
