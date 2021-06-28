@@ -14,7 +14,12 @@ const {
 } = require('./webpack/env-rules-handler');
 const { R, join, dist } = require('./paths');
 
-const { DEV_PORT, TARGET_TYPE, devtool, PUBLIC_PATH } = require('../config');
+const {
+  DEV_PORT = 38924,
+  TARGET_TYPE,
+  devtool,
+  PUBLIC_PATH,
+} = require('../config');
 
 const { notHotReload } = require('./webpack/entry-conf');
 
