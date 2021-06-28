@@ -20,6 +20,7 @@
         "~/*": ["src/*"],
         "~Assets/*":["src/assets/*"],
         "~Lib/*": ["src/lib/*"],
+        "~Layouts/*":["src/layouts/*"],
         "~Pages/*": ["src/pages/*"],
         "~Store/*":["src/store/*"],
         "~UI/*":["src/ui/*"],

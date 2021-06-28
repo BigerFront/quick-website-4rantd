@@ -1,7 +1,4 @@
-// https://ant.design/docs/react/customize-theme-cn 在线设计
-const antdThemeVars = {
-  dark: true,
-  compact: true,
+module.exports = {
   '@primary-color': '#0070cc',
   '@success-color': '#1e8e3e',
   '@info-color': '@primary-color',
@@ -12,9 +9,8 @@ const antdThemeVars = {
   '@text-color-secondary': 'fade(#000, 45%)',
   '@border-color-base': '#dedede',
   '@border-color-split': '#dedede',
-  '@layout-header-background': 'rgba(0,0,0,0.8)', // light #f0f2f5 dark: rgba(0,0,0,0.8)
   '@layout-body-background': '#fafafa',
-  '@font-size-base': '14px',
+  '@font-size-base': '12px',
   '@border-radius-base': '0',
   '@border-radius-sm': '0',
   '@outline-width': '0',
@@ -53,9 +49,4 @@ const antdThemeVars = {
   '@alert-warning-bg-color': '#fff7db',
   '@alert-error-border-color': '#fcebea',
   '@alert-error-bg-color': '#fcebea',
-  //   '@layout-header-height': '40px',
-  //   '@layout-header-padding': '0 12px',
-  //   '@layout-footer-padding': '0 12px',
 };
-
-module.exports = antdThemeVars;

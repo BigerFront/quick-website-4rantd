@@ -4,12 +4,13 @@ const alias = {
   '~': src,
   '~Assets': R(src, 'assets'),
   '~Lib': R(src, 'lib'),
+  '~Layouts': R(src, 'layouts'),
   '~Pages': R(src, 'pages'),
   '~Store': R(src, 'store'),
   '~UI': R(src, 'ui'),
-  // '~Views':R(src,views), // 备用
+  '~Views': R(src, 'views'), // 备用
   '~Widgets': R(src, 'ui/widgets'),
-  // 'react-dom': '@hot-loader/react-dom',
+  'react-dom': '@hot-loader/react-dom',
 };
 
 const fileExtensions = [

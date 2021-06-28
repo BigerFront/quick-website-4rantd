@@ -1,0 +1,12 @@
+/**
+ * This file is used to define the HomePage style.
+ * This file must be imported into parent scss file, to take it effect.
+ * like : @import './home/home-index.scss';
+*/
+.home-page {
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+}

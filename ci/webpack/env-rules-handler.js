@@ -1,6 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { compactThemeSingle } = require('antd/dist/theme');
-const { AntdThemeVariables } = require('../theme');
+const { AntdThemeVariables, AntdDarkThemeVariables } = require('../theme');
 
 const antdLessRule = {
   test: /antd.*\.less$/,
@@ -9,11 +9,14 @@ const antdLessRule = {
     {
       loader: 'less-loader',
       options: {
-        modifyVars: {
-          ...compactThemeSingle,
-          ...AntdThemeVariables,
+        lessOptions: {
+          javascriptEnabled: true,
+          modifyVars: {
+            ...compactThemeSingle,
+            ...AntdThemeVariables,
+          },
         },
-        javascriptEnabled: true,
+        // javascriptEnabled: true,  // less-loader < 6
       },
     },
   ],
@@ -50,7 +53,9 @@ function envRulesHandle(config, isDev = false) {
     scssRule.use = [MiniCssExtractPlugin.loader].concat(scssRule.use);
   }
 
-  config.module.rules = [scssRule].concat(config.module.rules || []);
+  config.module.rules = [antdLessRule, scssRule].concat(
+    config.module.rules || []
+  );
 }
 
 function envDevToolHandle(config, NODE_ENV, devtool) {
