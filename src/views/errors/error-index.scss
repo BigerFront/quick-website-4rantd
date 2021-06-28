@@ -30,6 +30,10 @@ $perspective: 1200px;
   perspective: $perspective;
   //   border: 1px solid royalblue;
 
+  p {
+    font-weight: 100;
+  }
+
   & > * {
     box-sizing: border-box;
     transform-style: preserve-3d;
@@ -43,8 +47,8 @@ $perspective: 1200px;
     letter-spacing: 1rem;
     transform: translate3d(0, 0, 0vmin);
     --x: calc(50% + var(--swing-x) * 0.5 * 1%);
-    background: radial-gradient($err-lit-header, $err-header 45%) var(--x) 100%/200%
-      200%;
+    background: radial-gradient($err-lit-header, $err-header 45%) var(--x) 100% /
+      200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     // color: transparent;
@@ -57,11 +61,25 @@ $perspective: 1200px;
       left: 0;
       color: $err-shadow;
       filter: blur(1.5vmin);
-      transform: scale(1.05) translate3d(0, 5%, -2vmin)
+      transform: scale(1.05) translate3d(0, 12%, -10vmin)
         translate(
           calc((var(--swing-x, 0) * 0.05) * 1%),
           calc((var(--swing-y) * 0.05) * 1%)
         );
+    }
+  }
+
+  &__info {
+    text-align: center;
+    line-height: 1.5;
+    max-width: clamp(16rem, 90vmin, 25rem);
+
+    & > h2 {
+      color: $err-color;
+    }
+
+    & > p {
+      margin-bottom: 3rem;
     }
   }
 }
@@ -70,9 +88,9 @@ $perspective: 1200px;
   animation: err-swing $err-speed infinite alternate-reverse ease-in-out;
   height: 100%;
   width: 100%;
-  transform-origin: 60% 40%;
+  transform-origin: 50% 30%;
   transform: rotate(calc(var(--swing-x) * -0.05deg));
-  background: radial-gradient(88% 48% at 65% 50%, transparent, black 35%);
+  background: radial-gradient(56% 65% at 75% 50%, transparent, black 42%);
 
   &__wrapper {
     position: fixed;
@@ -114,8 +132,8 @@ $perspective: 1200px;
     --swing-y: 0;
   }
   100% {
-    --swing-y: -100;
     --swing-x: 100;
+    --swing-y: -100;
   }
 }
 @-o-keyframes err-swing {
@@ -140,7 +158,7 @@ $perspective: 1200px;
     --swing-y: 0;
   }
   100% {
-    --swing-y: -100;
     --swing-x: 100;
+    --swing-y: -100;
   }
 }
