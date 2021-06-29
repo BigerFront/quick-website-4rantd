@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useLocation } from 'react-router-dom';
+import { Button } from 'antd';
 
 export default function PageNotFound(props) {
   let location = useLocation();
@@ -20,6 +21,11 @@ export default function PageNotFound(props) {
           We're fairly sure that page used to be here, but seems to have gone
           missing. We do apologise on it's behalf.
         </p>
+        <div className="btn-wrapper">
+          <Button type="text" className="home-btn" shape="round" size="large">
+            GO Home
+          </Button>
+        </div>
       </div>
     </div>
   );

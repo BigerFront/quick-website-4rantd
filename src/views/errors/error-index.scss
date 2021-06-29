@@ -79,7 +79,20 @@ $perspective: 1200px;
     }
 
     & > p {
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-wrapper {
+      padding: 1rem 4rem;
+      margin-bottom: 4rem;
+
+      button.home-btn {
+        text-transform: uppercase;
+        background: hsl(44, 0%, 70%);
+        color: hsl(0, 0%, 4%);
+        font-size: 0.875rem;
+        letter-spacing: 0.05rem;
+      }
     }
   }
 }
