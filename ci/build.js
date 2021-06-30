@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /** Make early set env */
 const DEV_ENV_VALT = 'production';
 process.env.BABEL_ENV = DEV_ENV_VALT;
@@ -6,6 +8,8 @@ process.env.NODE_ENV = DEV_ENV_VALT;
 const { webpack } = require('webpack');
 const chalk = require('chalk');
 const fs = require('fs-extra');
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const {
   envRulesHandle,
@@ -79,6 +83,22 @@ config.optimization = {
 envRulesHandle(config, true);
 
 envDevToolHandle(config, process.env.NODE_ENV, devtool);
+
+/** Build plugins */
+const buildPlugins = [
+  // new CompressionPlugin({
+  //   filename: '[path].gz[query]',
+  //   algorithm: 'gzip',
+  //   test: new RegExp(/\.js(\?.*)?$/, 'i'),
+  //   threshold: 10240,
+  //   minRatio: 0.8,
+  // }),
+  new BundleAnalyzerPlugin({
+    analyzerPort: 8864,
+  }),
+];
+
+config.plugins = config.plugins.concat(buildPlugins);
 
 const compiler = webpack(config, (err, stats) => {
   if (err) {

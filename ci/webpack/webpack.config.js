@@ -25,7 +25,6 @@ const htmlPlugins = [
     favicon: favicon,
   }),
 ];
-const entryMain = R(src, 'Boot', 'index.js');
 
 var options = {
   context: context,
