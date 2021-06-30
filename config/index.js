@@ -26,11 +26,11 @@ if (fs.existsSync(localeEnvPath)) {
 let SECRETS_ENV_PATH = path.resolve(
   __dirname,
   '../../',
-  '.localenv/cfg-extensions'
+  '.localenv'
 );
 let secretsEnv = {};
-if (fs.existsSync(path.join(SECRETS_ENV_PATH, '/secrets.env.js'))) {
-  secretsEnv = require(path.join(SECRETS_ENV_PATH, '/secrets.env.js'));
+if (fs.existsSync(path.join(SECRETS_ENV_PATH, '/.ws-secrets.env.js'))) {
+  secretsEnv = require(path.join(SECRETS_ENV_PATH, '/.ws-secrets.env.js'));
 } else {
   console.log(
     chalk.redBright(
