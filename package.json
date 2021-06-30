@@ -9,6 +9,7 @@
     "serve": "lite-server -c ci/pub-bs-config.js",
     "mod:view": "cross-env node ci/quickdev/view-module-creator.js",
     "changelog": "conventional-changelog",
+    "pick:icons": "node ci/tools/pick-svg-id.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -57,6 +58,7 @@
     "@types/react-dom": "^17.0.8",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
+    "archiver": "^5.3.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-import": "^1.13.3",
@@ -91,6 +93,7 @@
     "resolve-url-loader": "^4.0.0",
     "sass": "^1.35.1",
     "sass-loader": "^12.1.0",
+    "shelljs": "^0.8.4",
     "source-map-loader": "^3.0.0",
     "style-loader": "^2.0.0",
     "stylus-converter": "^0.8.1",
