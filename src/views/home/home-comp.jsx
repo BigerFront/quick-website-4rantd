@@ -8,7 +8,7 @@ export default class HomePage extends PureComponent {
   }
 
   renderContent() {
-    return <div className="home-page__main">home Content</div>;
+    return <div className="home-page__main">home sdsdf</div>;
   }
 
   renderFooter() {

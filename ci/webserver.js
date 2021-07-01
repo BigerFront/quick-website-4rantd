@@ -49,7 +49,7 @@ config.output = {
 };
 
 // handle rule
-envRulesHandle(config, true);
+// envRulesHandle(config, true);
 
 envDevToolHandle(config, process.env.NODE_ENV, devtool);
 

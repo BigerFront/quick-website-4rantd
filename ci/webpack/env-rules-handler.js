@@ -62,6 +62,7 @@ function envDevToolHandle(config, NODE_ENV, devtool) {
   config.devtool = devtool;
   if (NODE_ENV === 'production') {
   } else if (NODE_ENV === 'development') {
+    config.target = 'web';
     config.stats = {
       // colors: '\u001b[32m',
       // entrypoints: 'auto',

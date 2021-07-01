@@ -9,6 +9,10 @@ import configurationStore, { initialState } from '~/store';
 
 import Root from './root-comp';
 
+if (module.hot) {
+  module.hot.accept(); // bundle.js 支持HMR
+}
+
 export const history =
   process.env.NODE_ENV === 'development'
     ? createHashHistory()

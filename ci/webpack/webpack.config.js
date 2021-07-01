@@ -3,21 +3,24 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 const NullWebpackPlugin = require('./null-webpack-plugin');
 
-const definePlugins = require('./eject-env-plugins');
 const { context, R, src, dist, join, favicon } = require('../paths');
-const envWrapper = require('../../config');
+const { prodMode, APP_TITLE, NODE_ENV } = require('../../config');
 
 const { alias, fileExtensions } = require('./resolve-conf');
+const { entry, htmlExternals } = require('./entry-conf');
+const { compactThemeSingle } = require('antd/dist/theme');
+const { AntdNinJaThemeVariables } = require('../theme');
 
-const { entry } = require('./entry-conf');
+const definePlugins = require('./eject-env-plugins');
+const copyPlugins = require('./copy-plugin-conf');
 
-const htmlPlugins = [
+let htmlPlugins = [
   new HtmlWebpackPlugin({
     template: R(src, 'Boot', 'template.ejs'),
-    title: envWrapper['APP_NAME'] || 'Official Website',
+    title: APP_TITLE || 'Official Website',
     filename: 'index.html',
     chunks: ['main'],
     cache: false,
@@ -26,43 +29,25 @@ const htmlPlugins = [
   }),
 ];
 
+if (prodMode) {
+  htmlPlugins.concat([
+    new HtmlWebpackExternalsPlugin({
+      externals: [...htmlExternals],
+    }),
+  ]);
+}
+
 var options = {
   context: context,
-  mode: envWrapper.NODE_ENV,
+  mode: NODE_ENV,
   entry: entry,
-  // output: {
-  //   path: join(dist, envWrapper.TARGET_TYPE || 'bs'),
-  //   clean: true,
-  //   pathinfo: true,
-  //   filename: '[name].js',
-  //   filename: function (pathData) {
-  //     return pathData.chunk.name === 'main'
-  //       ? '[name].js'
-  //       : '[name]/[chunkhash].js';
-  //   },
-  //   chunkFilename: (pathData) => {
-  //     return pathData.chunk.name === 'main'
-  //       ? '[name].js'
-  //       : '[name]/[chunkhash].js';
-  //   },
-  //   publicPath: PUBLIC_PATH,
-  // },
   resolve: {
     alias: alias,
     extensions: fileExtensions
       .map(function (extension) {
         return '.' + extension;
       })
-      .concat([
-        '.js',
-        '.jsx',
-        '.ts',
-        '.tsx',
-        '.css',
-        '.less',
-        '.sass',
-        '.scss',
-      ]),
+      .concat(['.js', '.jsx', '.ts', '.tsx']),
   },
   module: {
     rules: [
@@ -71,6 +56,7 @@ var options = {
         loader: 'url-loader',
         options: {
           name: '[name].[ext]',
+          limit: 8192,
         },
         exclude: /node_modules/,
       },
@@ -96,6 +82,48 @@ var options = {
         ],
         exclude: /node_modules/,
       },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          prodMode ? { loader: MiniCssExtractPlugin.loader } : 'style-loader',
+          {
+            loader: 'css-loader', // 将CSS转化成ComminJS模块
+          },
+          {
+            loader: 'resolve-url-loader', // 置于 loader 链中的 sass-loader 之前，就可以重写 url ,解决url()
+          },
+          {
+            loader: 'sass-loader', //将Sass 编译成CSS
+            options: {
+              sourceMap: true,
+              implementation: require('sass'),
+              sassOptions: {
+                fiber: require('fibers'),
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /antd.*\.less$/,
+        use: [
+          prodMode ? { loader: MiniCssExtractPlugin.loader } : 'style-loader',
+          'css-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+                modifyVars: {
+                  ...compactThemeSingle,
+                  ...AntdNinJaThemeVariables,
+                },
+              },
+              // javascriptEnabled: true,  // less-loader < 6
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -107,10 +135,8 @@ var options = {
       cleanOnceBeforeBuildPatterns: [],
     }),
     new webpack.EnvironmentPlugin(['NODE_ENV']),
-    process.env.NODE_ENV === 'production'
-      ? new MiniCssExtractPlugin()
-      : new NullWebpackPlugin(),
 
+    ...copyPlugins,
     ...htmlPlugins,
   ],
 };
