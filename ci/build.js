@@ -65,6 +65,7 @@ config.output = {
 };
 
 config.optimization = {
+  runtimeChunk: true,
   minimize: true,
   minimizer: [
     new TerserPlugin({
@@ -94,7 +95,6 @@ config.optimization = {
       },
     },
   },
-  runtimeChunk: true,
 };
 
 // handle rule
