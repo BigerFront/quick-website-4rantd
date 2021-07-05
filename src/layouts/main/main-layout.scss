@@ -15,8 +15,15 @@ section.main-layout {
     display: flex;
     flex-flow: column nowrap;
     flex: 1 1 100%;
+    align-items: center;
+
+    & > div {
+      max-width: #{$content-max-width}px;
+    }
 
     > div.error-page {
+      width: 100%;
+      max-width: 100%;
       flex: 1 1 100%;
     }
   }

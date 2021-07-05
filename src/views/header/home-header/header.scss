@@ -1,0 +1,54 @@
+/**
+ * This file is used to define the HeaderPage style.
+ * This file must be imported into parent scss file, to take it effect.
+ * like : @import './home-header/header.scss';
+*/
+.qk-header {
+  max-width: 1600px;
+  display: flex;
+  flex: 1 1 100%;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  &__logo {
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 0 0 auto;
+    padding: 0 12px;
+    align-items: center;
+
+    > span.qk-app-title {
+      padding-left: 12px;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-title {
+    // color: #fff;
+    font-size: 1.125rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex: 0 0 auto;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+  }
+
+  &-navmenu {
+    font-size: 1rem;
+  }
+}
+
+.qk-dark {
+  button.ant-btn {
+    color: #fff;
+  }
+}

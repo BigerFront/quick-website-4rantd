@@ -1,0 +1,43 @@
+/**
+ * This file is used to define the FooterPage style.
+ * This file must be imported into parent scss file, to take it effect.
+ * like : @import './footer/foot.scss';
+*/
+.qk-foot {
+  max-width: #{$content-max-width}px;
+  flex: 1 1 auto;
+
+  &-divider {
+    margin: 2px 2px;
+    color: #fff;
+    border-top-color: #fff;
+  }
+
+  &__container {
+    display: flex;
+    flex-flow: column nowrap;
+
+    &.copyright {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+
+      > div {
+        flex: 0 0 auto;
+      }
+    }
+  }
+
+  .cpybar {
+    &-text {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    &-sitemap {
+      flex: 1 1 auto;
+    }
+  }
+}

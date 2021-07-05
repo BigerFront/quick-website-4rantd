@@ -9,10 +9,13 @@ const chalk = require('chalk');
 const fs = require('fs-extra');
 
 const {
-  envRulesHandle,
-  envDevToolHandle,
-} = require('./webpack/env-rules-handler');
-const { R, join, dist } = require('./paths');
+  ERR_TEXT_HEX_COLOR,
+  SUCCESS_TEXT_HEX_COLOR,
+  WIKI_TEXT_HEX_COLOR,
+} = require('./colors-cnsts');
+
+const { envDevToolHandle } = require('./webpack/env-rules-handler');
+const { join, dist } = require('./paths');
 
 const {
   DEV_PORT = 38924,
@@ -21,9 +24,13 @@ const {
   PUBLIC_PATH,
 } = require('../config');
 
+showHelp();
+
+const { open } = handleArgvs();
+
 const { notHotReload } = require('./webpack/entry-conf');
 
-const distTarget = join(dist, TARGET_TYPE || 'bs');
+const distTarget = join(dist, TARGET_TYPE || 'web');
 if (fs.existsSync(distTarget)) {
   fs.removeSync(distTarget);
 }
@@ -75,7 +82,7 @@ const HMROptions = {
   contentBase: join(__dirname, 'dist', TARGET_TYPE),
   port: DEV_PORT,
   hot: true,
-  open: false,
+  open: open,
   // openPage: ['index.html'],
   injectClient: true,
   writeToDisk: true,
@@ -100,10 +107,61 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
 
 server.listen(DEV_PORT, 'localhost', () => {
   console.log(
-    chalk.greenBright(
+    chalk.hex(SUCCESS_TEXT_HEX_COLOR)(
       'dev Server listening on : http://localhost:' + DEV_PORT + '/'
     )
   );
 });
 
 module.exports = config;
+
+function showHelp() {
+  let originalArgvs = process.env.npm_config_argv
+    ? JSON.parse(process.env.npm_config_argv).original
+    : process.argv;
+  let idx = originalArgvs.findIndex((argv) => argv === '--help');
+  let cidx = originalArgvs.findIndex((argv) => argv === '-h');
+  if (idx > 0 || cidx > 0) {
+    console.log(cmdComments());
+    process.exit(0);
+  }
+}
+
+function handleArgvs() {
+  let bashOptions = {
+    open: false,
+  };
+  const SERVER_ARGV_KEYS = ['-o', '--open'];
+
+  let originalArgvs = process.env.npm_config_argv
+    ? JSON.parse(process.env.npm_config_argv).original
+    : process.argv;
+
+  let idx = -1;
+  const argvLen = originalArgvs.length;
+  idx = originalArgvs.findIndex((argv) => argv === SERVER_ARGV_KEYS[0]);
+
+  if (idx > 0) {
+    bashOptions.open = true;
+  }
+
+  idx = originalArgvs.findIndex((argv) => argv === SERVER_ARGV_KEYS[1]);
+
+  if (idx > 0) {
+    bashOptions.open = true;
+  }
+
+  return bashOptions;
+}
+
+function cmdComments() {
+  let c =
+    '\n' +
+    chalk.hex(WIKI_TEXT_HEX_COLOR)(`✨✨✨ terminal arguments: ✨✨✨\n`) +
+    chalk.hex(WIKI_TEXT_HEX_COLOR)(`\t -h or --help : show commands help.\n`) +
+    chalk.hex(WIKI_TEXT_HEX_COLOR)(
+      `\t --open or -o : open page in system default browser.\n`
+    );
+
+  return c;
+}

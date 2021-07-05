@@ -1,0 +1,12 @@
+/**
+ * This file is used to define the AboutPage style.
+ * This file must be imported into parent scss file, to take it effect.
+ * like : @import './about/index.scss';
+*/
+.index-page {
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+}
