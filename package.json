@@ -10,6 +10,7 @@
     "mod:view": "cross-env node ci/quickdev/view-module-creator.js",
     "changelog": "conventional-changelog",
     "pick:icons": "node ci/tools/pick-svg-id.js",
+    "deploy": "node ci/tools/build-push-zip",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
