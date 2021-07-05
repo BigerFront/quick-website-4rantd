@@ -12,8 +12,8 @@ const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const {
   ERR_TEXT_HEX_COLOR,
@@ -53,13 +53,13 @@ config.output = {
   // filename: `${jsBase}/[name].js`,
   filename: function (pathData) {
     return pathData.chunk.name === 'main'
-      ? `${jsBase}/[name].[hash].js`
-      : `${jsBase}/[name].[chunkhash].js`;
+      ? `${jsBase}/[name].js`
+      : `${jsBase}/[name].[fullhash:8].js`;
   },
   chunkFilename: (pathData) => {
     return pathData.chunk.name === 'main'
-      ? `${jsBase}/[name].[hash].js`
-      : `${jsBase}/[name].[chunkhash].js`;
+      ? `${jsBase}/[name].js`
+      : `${jsBase}/[name].[fullhash:8].js`;
   },
   publicPath: PUBLIC_PATH,
 };
@@ -68,7 +68,8 @@ config.optimization = {
   runtimeChunk: true,
   minimize: true,
   minimizer: [
-    new TerserPlugin({
+    new UglifyJsPlugin({
+      test: /\.js(\?.*)?$/i,
       parallel: true,
     }),
     new CssMinimizerPlugin(),
@@ -86,12 +87,26 @@ config.optimization = {
         test: /[\\/]node_modules[\\/]/, // window diff uinx
         name: 'vendors',
         chunks: 'initial',
+        minChunks: 1,
+        maxAsyncRequests: 5,
+        minSize: 100 * 1024,
+        maxSize: 5 * 1000 * 1024,
+        // chunks: 'initial',
+        priority: -10,
+      },
+      common: {
+        name: 'common',
+        minChunks: 2,
+        priority: -20,
+        chunks: 'initial',
+        reuseExistingChunk: true, //如果当前块包含已经从主包中分离出来的模块，那么该模块将被重用，而不是生成新的模块
       },
       async: {
         test: /[\\/]node_modules[\\/]/,
         name: 'async',
         chunks: 'async',
         minChunks: 4,
+        reuseExistingChunk: true,
       },
     },
   },
@@ -123,9 +138,15 @@ const buildPlugins = [
 config.plugins = config.plugins.concat(buildPlugins);
 
 const compiler = webpack(config, (err, stats) => {
-  if (err) {
+  if (err || stats.hasErrors()) {
     console.log(
-      '🤢🤢🤢Build fail : \n' + chalk.hex(ERR_TEXT_HEX_COLOR)(err.message)
+      '🤢🤢🤢Build fail : \n' + chalk.hex(ERR_TEXT_HEX_COLOR)(err || stats)
+    );
+  } else {
+    console.log(
+      chalk.hex(SUCCESS_TEXT_HEX_COLOR)(
+        `✨✨✨ build production succesful. ✨✨✨`
+      )
     );
   }
 });

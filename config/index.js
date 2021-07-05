@@ -23,11 +23,7 @@ if (fs.existsSync(localeEnvPath)) {
 }
 
 /* Secret Configuration */
-let SECRETS_ENV_PATH = path.resolve(
-  __dirname,
-  '../../',
-  '.localenv'
-);
+let SECRETS_ENV_PATH = path.resolve(__dirname, '../../', '.localenv');
 let secretsEnv = {};
 if (fs.existsSync(path.join(SECRETS_ENV_PATH, '/.ws-secrets.env.js'))) {
   secretsEnv = require(path.join(SECRETS_ENV_PATH, '/.ws-secrets.env.js'));
@@ -61,7 +57,10 @@ console.log(
 );
 
 function getTargetArgv() {
-  let target = 'bs';
+  /**
+   * https://webpack.js.org/configuration/target/#root
+   */
+  let target = 'web'; // browserslist
   if (process.env.TARGET_TYPE === 'gitpages') {
     return process.env.TARGET_TYPE;
   }
@@ -75,7 +74,7 @@ function getTargetArgv() {
     let _argvTarget =
       idx < originalArgvs.length - 1 ? originalArgvs[idx + 1] : '';
 
-    (_argvTarget === 'bs' || _argvTarget === 'gitpages') &&
+    (_argvTarget === 'web' || _argvTarget === 'gitpages') &&
       (target = _argvTarget);
   }
 

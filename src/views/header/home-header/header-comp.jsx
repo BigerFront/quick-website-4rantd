@@ -14,7 +14,10 @@ export default class HeaderPage extends PureComponent {
   renderLogo() {
     return (
       <>
-        <Avatar size={40} src={<Image src={Logo} />}></Avatar>
+        <Avatar
+          size={40}
+          src={<Image src={Logo} preview={false} alt="logo" />}
+        ></Avatar>
         <span className="qk-app-title">{appTitle}</span>
       </>
     );

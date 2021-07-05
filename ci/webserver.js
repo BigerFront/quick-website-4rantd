@@ -45,12 +45,12 @@ config.output = {
   filename: function (pathData) {
     return pathData.chunk.name === 'main'
       ? '[name].js'
-      : '[name]/[chunkhash].js';
+      : '[name]/[chunkhash:8].js';
   },
   chunkFilename: (pathData) => {
     return pathData.chunk.name === 'main'
       ? '[name].js'
-      : '[name]/[chunkhash].js';
+      : '[name]/[chunkhash:8].js';
   },
   publicPath: PUBLIC_PATH,
 };

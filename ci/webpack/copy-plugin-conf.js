@@ -11,6 +11,11 @@ const copyPlugins = [
         to: R(dist, TARGET_TYPE, 'shared/js'),
         force: true,
       },
+      {
+        from: R('shared', 'images'),
+        to: R(dist, TARGET_TYPE, 'shared/images'),
+        force: true,
+      },
     ],
   }),
 ];
