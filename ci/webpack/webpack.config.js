@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 const NullWebpackPlugin = require('./null-webpack-plugin');
 
-const { context, R, src, dist, join, favicon } = require('../paths');
+const { context, R, src, join, favicon } = require('../paths');
 const { prodMode, APP_TITLE, NODE_ENV } = require('../../config');
 
 const { alias, fileExtensions } = require('./resolve-conf');
@@ -30,7 +30,7 @@ let htmlPlugins = [
 ];
 
 if (prodMode) {
-  htmlPlugins.concat([
+  htmlPlugins = htmlPlugins.concat([
     new HtmlWebpackExternalsPlugin({
       externals: [...htmlExternals],
     }),
