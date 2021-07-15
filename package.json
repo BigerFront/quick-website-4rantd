@@ -8,6 +8,7 @@
     "build": "node ci/build",
     "serve": "lite-server -c ci/pub-bs-config.js",
     "mod:view": "cross-env node ci/quickdev/view-module-creator.js",
+    "mod:func": "cross-env VIEW_BASE=views node ci/quickdev/func-module-creator.js",
     "changelog": "conventional-changelog",
     "pick:icons": "node ci/tools/pick-svg-id.js",
     "deploy": "node ci/tools/build-push-zip",
